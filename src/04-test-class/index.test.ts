@@ -3,7 +3,9 @@ import { getBankAccount } from '.';
 import lodash from 'lodash';
 
 describe('BankAccount', () => {
-  beforeAll(() => jest.clearAllMocks());
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
 
   test('should create account with initial balance', () => {
     const bankAccount = getBankAccount(100);
