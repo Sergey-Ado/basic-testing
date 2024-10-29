@@ -1,5 +1,5 @@
 // Uncomment the code below and write your tests
-import { getBankAccount } from '.';
+import { getBankAccount, InsufficientFundsError } from '.';
 import lodash from 'lodash';
 
 describe('BankAccount', () => {
@@ -17,9 +17,7 @@ describe('BankAccount', () => {
   test('should throw InsufficientFundsError error when withdrawing more than balance', () => {
     const bankAccount = getBankAccount(100);
 
-    expect(() => bankAccount.withdraw(200)).toThrow(
-      'Insufficient funds: cannot withdraw more than 100',
-    );
+    expect(() => bankAccount.withdraw(200)).toThrow(InsufficientFundsError);
   });
 
   test('should throw error when transferring more than balance', () => {
@@ -27,7 +25,7 @@ describe('BankAccount', () => {
     const secondBankAccount = getBankAccount(0);
 
     expect(() => bankAccount.transfer(200, secondBankAccount)).toThrow(
-      'Insufficient funds: cannot withdraw more than 100',
+      InsufficientFundsError,
     );
   });
 
